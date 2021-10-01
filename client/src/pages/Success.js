@@ -16,8 +16,8 @@ const Success = () => {
             const products = cart.map(item => item._id);
         
             if (products.length) {
-                const { data } = await addOrder({
-                    variables: { products }
+                const { data } = await addOrder({ 
+                    variables: { products } 
                 });
                 const productData = data.addOrder.products;
 
@@ -28,12 +28,12 @@ const Success = () => {
             }
         };
 
+        setTimeout(() => {
+            window.location.assign('/');
+        }, 3000);
+
         saveOrder();
     }, [addOrder]);
-
-    setTimeout(() => {
-        window.location.assign('/');
-    }, 3000);
 
     return (
         <div>
