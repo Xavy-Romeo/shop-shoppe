@@ -15,12 +15,12 @@ function ProductItem(item) {
     price,
     quantity
   } = item;
-  
-  const { cart } = state;
+
+  const { cart } = state
 
   const addToCart = () => {
     // find the cart item with the matching id
-    const itemInCart = cart.find(cartItem => cartItem._id === _id);
+    const itemInCart = cart.find((cartItem) => cartItem._id === _id);
     
     // if there was a match, call UPDATE with a new purchase quantity
     if (itemInCart) {
@@ -33,18 +33,18 @@ function ProductItem(item) {
         ...itemInCart,
         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
       });
-    }
+    } 
     else {
       dispatch({
         type: ADD_TO_CART,
         product: { ...item, purchaseQuantity: 1 }
       });
-      idbPromise('cart', 'put', { ...item, purchaseQuantity: 1});
+      idbPromise('cart', 'put', { ...item, purchaseQuantity: 1 });
     }
   };
 
   return (
-    <div className='card px-1 py-1'>
+    <div className="card px-1 py-1">
       <Link to={`/products/${_id}`}>
         <img
           alt={name}
@@ -53,14 +53,10 @@ function ProductItem(item) {
         <p>{name}</p>
       </Link>
       <div>
-        <div>{quantity} {pluralize('item', quantity)} in stock</div>
+        <div>{quantity} {pluralize("item", quantity)} in stock</div>
         <span>${price}</span>
       </div>
-      <button 
-        onClick={addToCart}
-      >
-        Add to cart
-      </button>
+      <button onClick={addToCart}>Add to cart</button>
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 
-import { QUERY_CATEGORIES } from '../../utils/queries';
 import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY } from '../../utils/actions';
+import { QUERY_CATEGORIES } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 
 function CategoryMenu() {
@@ -21,18 +21,16 @@ function CategoryMenu() {
         type: UPDATE_CATEGORIES,
         categories: categoryData.categories
       });
-      // also save each category to IndexedDB
       categoryData.categories.forEach(category => {
         idbPromise('categories', 'put', category);
       });
-    }
+    } 
     else if (!loading) {
-      idbPromise('categories', 'get')
-        .then(categories => {
-          dispatch({
-            type: UPDATE_CATEGORIES,
-            categories: categories
-          });
+      idbPromise('categories', 'get').then(categories => {
+        dispatch({
+          type: UPDATE_CATEGORIES,
+          categories: categories
+        });
       });
     }
   }, [categoryData, loading, dispatch]);

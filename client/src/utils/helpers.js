@@ -1,14 +1,14 @@
 export function pluralize(name, count) {
   if (count === 1) {
-    return name
+    return name;
   }
-  return name + 's'
-};
+  return name + 's';
+}
 
 export function idbPromise(storeName, method, object) {
   return new Promise((resolve, reject) => {
     // open connection to the database `shop-shoppe` with the version of 1
-    const request = window.indexedDB.open('shop-shoppe', 1);
+    const request = window.indexedDB.open('shop-shop', 1);
 
     // create variables to hold reference to the database, transaction (tx), and object store
     let db, tx, store;
@@ -67,4 +67,4 @@ export function idbPromise(storeName, method, object) {
       };
     };
   });
-};
+}
